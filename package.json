@@ -1,0 +1,22 @@
+{
+  "name": "ljplay",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": {},
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.15.3",
+    "cheerio": "^0.22.0",
+    "element-ui": "^1.1.6",
+    "nuxt": "^0.9.9"
+  },
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "devDependencies": {
+    "postcss-hexrgba": "^0.2.1"
+  }
+}
