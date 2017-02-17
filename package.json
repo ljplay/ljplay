@@ -14,9 +14,11 @@
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
-    "generate": "nuxt generate"
+    "generate": "nuxt generate",
+    "deploy": "rimraf dist && npm run generate && cd dist && git init && git add . && git commit -m \"`date` update\" && git remote add origin https://github.com/ljplay/ljplay.github.io.git && git push origin HEAD --force"
   },
   "devDependencies": {
-    "postcss-hexrgba": "^0.2.1"
+    "postcss-hexrgba": "^0.2.1",
+    "rimraf": "^2.5.4"
   }
 }
