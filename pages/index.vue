@@ -22,7 +22,8 @@
     <div class="updatelog">
       <p>!!!updatelog</p>
       <p>update: 2017.2.17 页面中刷新按钮为刷新播放器，下载为下载当前播放资源</p>
-      <p>update: 2017.2.18 将真实资源链接的请求放到准备播放时进行，减少多文件的同步并发，由于服务器访问量过大，添加真实链接资源请求的重试次数为5次以增加成功率</p>
+      <p>update: 2017.2.18 将真实资源链接的请求放到准备播放时进行，减少多文件的同步并发，由于服务器访问量过大，添加真实链接资源请求的重试次数为2次以增加成功率</p>
+      <p>update: 2017.2.18 v2 目前只支持MP4格式的视频流，其余格式待修复支持</p>
     </div>
   </div>
 </template>
@@ -32,8 +33,26 @@
   import cheerio from 'cheerio'
   import {Loading} from 'element-ui'
 
+  function setupPlayer(file) {
+    console.log(file)
+    let player = jwplayer('player').setup({
+      sources: [{file, label: 'mp4', type:'video/mp4',"default": "true"}, {file, label:'webm', type: 'video/webm'}],
+      width: "925px",
+      height: `${Math.floor(925 / 16 * 9)}px`,
+      skin: {
+        name: "seven",
+        background: "transparent",
+      },
+      autostart: true,
+    });
+
+    return player
+  }
+
 
   export default{
+
+
     data() {
       return {
         hash: '',
@@ -117,16 +136,7 @@
         this.reset()
 //        this.currentIndex = null
 //        this.links = []
-        this.player = jwplayer('player').setup({
-          sources: [{file: this.file, label: 'default', type:'video/mp4',}],
-          width: "925px",
-          height: `${Math.floor(925 / 16 * 9)}px`,
-          skin: {
-            name: "seven",
-            background: "transparent",
-          },
-          autostart: true,
-        });
+        this.player = setupPlayer(this.file)
       },
       download() {
         window.open(this.links[this.currentIndex].url)
@@ -162,7 +172,7 @@
             return extractFileUrl(res.data)
           }catch (err) {
             res.config.times = ++res.config.times || 0
-            if (err.message === '未找到url' && res.config.times < 5) {
+            if (err.message === '未找到url' && res.config.times < 2) {
               return instance(res.config)
             }
             throw err
@@ -173,16 +183,9 @@
           loading.close()
           return url
         }).then((url) => {
-          this.player = jwplayer('player').setup({
-            sources: [{file: url, label: 'default', type:'video/mp4',}],
-            width: "925px",
-            height: `${Math.floor(925 / 16 * 9)}px`,
-            skin: {
-              name: "seven",
-              background: "transparent",
-            },
-            autostart: true,
-          });
+
+
+          this.player = setupPlayer(url)
         }).catch(e => {
           this.$message.error(e.message)
           loading.close()
