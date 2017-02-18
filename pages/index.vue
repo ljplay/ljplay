@@ -1,6 +1,8 @@
 <template>
   <div class="container">
-    <el-input v-model="hash" class="hash" placeholder="请输入磁链或者40位hash" @keyup.native.enter="search"></el-input>
+    <el-input v-model="hash" class="hash" placeholder="请输入40位hash" @keyup.native.enter="search">
+      <template slot="prepend">magnet:?xt=urn:btih:</template>
+    </el-input>
     <el-input v-model="file" class="file" placeholder="请输入资源地址" @keyup.native.enter="playFile"></el-input>
 
     <h3 v-if="links.length > 0"><i class="el-icon-caret-right"></i> 磁链解析结果</h3>
