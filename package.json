@@ -1,0 +1,24 @@
+{
+  "name": "ljplay",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": {},
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.15.3",
+    "cheerio": "^0.22.0",
+    "element-ui": "^1.1.6",
+    "nuxt": "^0.9.9"
+  },
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "deploy": "rimraf dist && npm run generate && cd dist && git init && git add . && git commit -m \"`date` update\" && git remote add origin https://github.com/ljplay/ljplay.github.io.git && git push origin HEAD --force"
+  },
+  "devDependencies": {
+    "postcss-hexrgba": "^0.2.1",
+    "rimraf": "^2.5.4"
+  }
+}
