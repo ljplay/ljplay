@@ -7,9 +7,11 @@
 
     <h3 v-if="links.length > 0"><i class="el-icon-caret-right"></i> 磁链解析结果</h3>
     <div class="list">
-      <el-button v-for="(link, index) in links" class="item" :key="index" :disabled="currentIndex === index" @click.native="switchSource(link, index)">
-        {{link.size}} - {{link.name}}
-      </el-button>
+      <div class="item-container" v-for="(link, index) in links">
+        <el-button class="item" :key="index" :disabled="currentIndex === index" @click.native="switchSource(link, index)">
+          {{link.size}} - {{link.name}}
+        </el-button>
+      </div>
     </div>
     <code v-if="links.length > 0">{{this.links}}</code>
     <div id="player"></div>
@@ -204,11 +206,19 @@
     flex-wrap: wrap;
     justify-content: space-around;
   }
-  .item {
+  .item-container {
     width: 40%;
+    padding: 10px;
+  }
+  .item {
+
+    width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+  .item:first-child{
+    margin-left: 10px;
   }
   #player {
     margin: 20px auto 0px;
