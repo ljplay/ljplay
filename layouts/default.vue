@@ -2,7 +2,10 @@
   <div>
     <nuxt id="container"/>
     <footer>
-      <div>© 2017 leftjs</div>
+      <div class="left">
+        <a href="https://github.com/leftjs"><img src="~assets/avatar.jpeg" alt=""></a>
+        © 2017 leftjs@github.com
+      </div>
       <div><el-button @click.native="contact()" :plain="true" type="info">给我写邮件 leftjs@foxmail.com</el-button></div>
     </footer>
   </div>
@@ -34,6 +37,16 @@
     bottom: 0;
     left: 0;
     right: 0;
+  }
+  .left {
+    display: flex;
+    align-items: center;
+  }
+  .left img {
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    margin-right: 20px;
   }
 </style>
 
